@@ -1,6 +1,6 @@
 site_name: Mobyclaw
 site_description: A long-lived personal AI agent that runs in Docker
-site_url: https://mobyclaw.vercel.app/
+site_url: https://mobyclaw.com/
 repo_url: https://github.com/mobyclaw/mobyclaw
 repo_name: mobyclaw/mobyclaw
 docs_dir: site/docs

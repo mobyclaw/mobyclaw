@@ -1,8 +1,8 @@
 site_name: Mobyclaw
 site_description: A long-lived personal AI agent that runs in Docker
-site_url: https://nunocoracao.github.io/mobyclaw/docs/
-repo_url: https://github.com/nunocoracao/mobyclaw
-repo_name: nunocoracao/mobyclaw
+site_url: https://mobyclaw.vercel.app/
+repo_url: https://github.com/mobyclaw/mobyclaw
+repo_name: mobyclaw/mobyclaw
 docs_dir: site/docs
 site_dir: _build/docs
 

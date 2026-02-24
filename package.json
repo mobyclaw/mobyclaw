@@ -1,0 +1,6 @@
+{
+  "name": "mobyclaw-site",
+  "scripts": {
+    "build": "pip install mkdocs-material && mkdocs build --config-file mkdocs.yml --site-dir _site/docs && mkdir -p _site && cp site/index.html _site/index.html"
+  }
+}

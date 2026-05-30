@@ -137,7 +137,19 @@
       border: 1px solid rgba(251,191,36,0.25);
       position: relative;
       overflow: hidden;
-      cursor: default;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+      max-width: 100%;
+    }
+
+    .ca-banner:hover {
+      border-color: rgba(251,191,36,0.5);
+      transform: translateY(-1px);
+    }
+
+    .ca-banner.copied {
+      border-color: rgba(52, 211, 153, 0.6);
+      background: linear-gradient(135deg, rgba(52, 211, 153, 0.1), rgba(52, 211, 153, 0.04));
     }
 
     .ca-banner::before {
@@ -146,6 +158,7 @@
       inset: 0;
       background: linear-gradient(90deg, transparent, rgba(251,191,36,0.06), transparent);
       animation: shimmer 3s infinite;
+      pointer-events: none;
     }
 
     @keyframes shimmer {
@@ -159,12 +172,14 @@
       font-weight: 700;
       color: #fbbf24;
       letter-spacing: 0.04em;
+      flex-shrink: 0;
     }
 
     .ca-divider {
       width: 1px;
       height: 16px;
       background: rgba(251,191,36,0.3);
+      flex-shrink: 0;
     }
 
     .ca-label {
@@ -173,33 +188,37 @@
       font-family: 'JetBrains Mono', monospace;
       letter-spacing: 0.06em;
       text-transform: uppercase;
+      flex-shrink: 0;
     }
 
-    .ca-soon-badge {
-      display: inline-flex;
+    .ca-address {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #fde68a;
+      letter-spacing: 0.02em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .ca-copy-icon {
+      color: rgba(251,191,36,0.5);
+      display: flex;
       align-items: center;
-      gap: 5px;
-      padding: 3px 10px;
-      border-radius: 99px;
-      background: rgba(251,191,36,0.15);
-      border: 1px solid rgba(251,191,36,0.3);
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: #fbbf24;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      flex-shrink: 0;
+      transition: color 0.2s, transform 0.2s;
     }
 
-    .ca-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #fbbf24;
-      animation: pulse-gold 2s infinite;
+    .ca-banner:hover .ca-copy-icon {
+      color: rgba(251,191,36,0.9);
+      transform: scale(1.1);
     }
 
-    @keyframes pulse-gold {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(251,191,36,0.4); }
-      50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(251,191,36,0); }
+    .ca-banner.copied .ca-copy-icon {
+      color: #34d399;
     }
 
     .hero-text .cta-row {
@@ -228,6 +247,45 @@
     }
     .glow-1 { width: 500px; height: 500px; background: var(--accent); top: -100px; left: -200px; }
     .glow-2 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; right: -100px; }
+
+    /* ── FEATURED ON SECTION ── */
+    .featured-on {
+      padding: 3rem 0 !important;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(56, 189, 248, 0.02);
+    }
+    .featured-label {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin: 0 auto 1.5rem;
+      max-width: none;
+    }
+    .featured-badges {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .featured-badges a {
+      opacity: 0.85;
+      transition: opacity 0.3s, transform 0.3s;
+      display: inline-block;
+    }
+    .featured-badges a:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+    .featured-badges img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
 
     .features-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -281,6 +339,23 @@
     footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; }
     footer p { margin: 0 auto; font-size: 0.9rem; }
 
+    .orynth-badge {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      opacity: 0.85;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .orynth-badge:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+    .orynth-badge img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
     @media (max-width: 768px) {
       .hero-inner { grid-template-columns: 1fr; text-align: center; }
       .hero-text .subtitle { margin: 1.5rem auto 0; }
@@ -297,7 +372,9 @@
       .config-grid { grid-template-columns: 1fr; }
       .features-grid { grid-template-columns: 1fr; }
       .how-it-works-diagram svg { max-width: 100%; }
-      .ca-banner { flex-wrap: wrap; }
+      .ca-banner { flex-wrap: nowrap; gap: 8px; padding: 9px 14px; }
+      .ca-address { font-size: 0.72rem; }
+      .featured-on { padding: 2rem 0 !important; }
     }
 
     @media (max-width: 480px) {
@@ -305,6 +382,11 @@
       .step-content { text-align: left; }
       h2 { font-size: 1.5rem; }
       .container { padding: 0 1rem; }
+      .ca-banner { gap: 6px; padding: 8px 12px; }
+      .ca-ticker { font-size: 0.82rem; }
+      .ca-label { display: none; }
+      .ca-divider { display: none; }
+      .ca-address { font-size: 0.68rem; }
     }
   </style>
 </head>
@@ -322,7 +404,7 @@
       <li><a href="docs/">Docs</a></li>
       <li><a href="https://x.com/mobyclaw">Twitter</a></li>
       <li>
-        <a href="https://github.com/mobyclaw/mobyclaw" class="nav-github">
+        <a href="https://github.com/mobyclaw/mobyclaw" class="nav-github" aria-label="GitHub">
           <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         </a>
       </li>
@@ -346,15 +428,18 @@
           projects — all with persistent memory.
         </p>
 
-        <!-- $MOBYCLAW CA — Coming Soon -->
-        <div class="ca-banner">
+        <!-- $MOBYCLAW CA -->
+        <div class="ca-banner" id="caBanner" onclick="copyCa()" title="Click to copy contract address">
           <span class="ca-ticker">$MOBYCLAW</span>
           <div class="ca-divider"></div>
           <span class="ca-label">CA</span>
-          <div class="ca-soon-badge">
-            <span class="ca-dot"></span>
-            0x
-          </div>
+          <span class="ca-address" id="caAddress">BqXTiNLfaaThKdUn3gDaE6aU4EbUd3vXa9CNUAvoPory</span>
+          <span class="ca-copy-icon" id="caCopyIcon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </span>
         </div>
 
         <div class="cta-row">
@@ -414,6 +499,18 @@
           </defs>
         </svg>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured On -->
+<section class="featured-on">
+  <div class="container">
+    <p class="featured-label">Featured on</p>
+    <div class="featured-badges">
+      <a href="https://orynth.dev/projects/moby-claw" target="_blank" rel="noopener" aria-label="Featured on Orynth">
+        <img src="https://orynth.dev/api/badge/moby-claw?theme=light&style=default" alt="Featured on Orynth" width="260" height="80" loading="lazy" />
+      </a>
     </div>
   </div>
 </section>
@@ -525,77 +622,108 @@
 <section id="how-it-works" style="background: linear-gradient(180deg, transparent, rgba(56, 189, 248, 0.03), transparent);">
   <div class="container">
     <h2>How It Works</h2>
-    <p>Four Docker containers working together - a gateway for messaging, an AI brain powered by cagent, a tool gateway with a full headless browser, and a dashboard for web UI and maintenance. Code lives in the repo, data lives in your home directory.</p>
+    <p>Four Docker containers working together — a gateway for messaging, an AI brain powered by cagent, a tool gateway with a full headless browser, and a dashboard for web UI and maintenance. Code lives in the repo, data lives in your home directory.</p>
     <div class="how-it-works-diagram">
       <svg viewBox="0 0 800 460" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="20" y="20" width="760" height="420" rx="20" fill="#111827" stroke="#1e293b" stroke-width="1.5" opacity="0.5"/>
-        <text x="50" y="52" font-family="sans-serif" font-size="13" fill="#94a3b8" opacity="0.6">Docker Compose Stack - 4 services, 1 data directory</text>
+        <text x="50" y="52" font-family="sans-serif" font-size="13" fill="#94a3b8" opacity="0.6">Docker Compose Stack — 4 services, 1 data directory</text>
+
+        <!-- Gateway container -->
         <rect x="60" y="75" width="220" height="180" rx="14" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" opacity="0.8"/>
         <rect x="60" y="75" width="220" height="32" rx="14" fill="#38bdf8" opacity="0.08"/>
         <rect x="60" y="95" width="220" height="12" fill="#0f172a"/>
         <text x="80" y="98" font-family="monospace" font-size="13" fill="#38bdf8" font-weight="bold">gateway</text>
         <text x="200" y="98" font-family="monospace" font-size="10" fill="#94a3b8">:3000</text>
-        <rect x="76" y="118" width="90" height="28" rx="6" fill="#38bdf8" opacity="0.08" stroke="#38bdf8" stroke-width="1" opacity="0.3"/>
+
+        <rect x="76" y="118" width="90" height="28" rx="6" fill="#38bdf8" fill-opacity="0.08" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.3"/>
         <text x="84" y="137" font-family="sans-serif" font-size="11" fill="#38bdf8">🔌 Telegram</text>
-        <rect x="176" y="118" width="90" height="28" rx="6" fill="#818cf8" opacity="0.08" stroke="#818cf8" stroke-width="1" opacity="0.3"/>
+
+        <rect x="176" y="118" width="90" height="28" rx="6" fill="#818cf8" fill-opacity="0.08" stroke="#818cf8" stroke-width="1" stroke-opacity="0.3"/>
         <text x="184" y="137" font-family="sans-serif" font-size="11" fill="#818cf8">📡 Sessions</text>
-        <rect x="76" y="156" width="90" height="28" rx="6" fill="#34d399" opacity="0.08" stroke="#34d399" stroke-width="1" opacity="0.3"/>
+
+        <rect x="76" y="156" width="90" height="28" rx="6" fill="#34d399" fill-opacity="0.08" stroke="#34d399" stroke-width="1" stroke-opacity="0.3"/>
         <text x="84" y="175" font-family="sans-serif" font-size="11" fill="#34d399">⏰ Scheduler</text>
-        <rect x="176" y="156" width="90" height="28" rx="6" fill="#f472b6" opacity="0.08" stroke="#f472b6" stroke-width="1" opacity="0.3"/>
+
+        <rect x="176" y="156" width="90" height="28" rx="6" fill="#f472b6" fill-opacity="0.08" stroke="#f472b6" stroke-width="1" stroke-opacity="0.3"/>
         <text x="184" y="175" font-family="sans-serif" font-size="11" fill="#f472b6">💓 Heartbeat</text>
-        <rect x="76" y="194" width="90" height="28" rx="6" fill="#fb923c" opacity="0.08" stroke="#fb923c" stroke-width="1" opacity="0.3"/>
+
+        <rect x="76" y="194" width="90" height="28" rx="6" fill="#fb923c" fill-opacity="0.08" stroke="#fb923c" stroke-width="1" stroke-opacity="0.3"/>
         <text x="88" y="213" font-family="sans-serif" font-size="11" fill="#fb923c">📬 Deliver</text>
-        <rect x="176" y="194" width="90" height="28" rx="6" fill="#a78bfa" opacity="0.08" stroke="#a78bfa" stroke-width="1" opacity="0.3"/>
+
+        <rect x="176" y="194" width="90" height="28" rx="6" fill="#a78bfa" fill-opacity="0.08" stroke="#a78bfa" stroke-width="1" stroke-opacity="0.3"/>
         <text x="188" y="213" font-family="sans-serif" font-size="11" fill="#a78bfa">🔀 Routes</text>
+
         <line x1="280" y1="168" x2="320" y2="168" stroke="#38bdf8" stroke-width="2" opacity="0.5"/>
         <polygon points="318,163 328,168 318,173" fill="#38bdf8" opacity="0.5"/>
         <text x="282" y="160" font-family="sans-serif" font-size="9" fill="#94a3b8">HTTP</text>
+
+        <!-- Moby container -->
         <rect x="328" y="75" width="220" height="180" rx="14" fill="#0f172a" stroke="#818cf8" stroke-width="1.5" opacity="0.8"/>
         <rect x="328" y="75" width="220" height="32" rx="14" fill="#818cf8" opacity="0.08"/>
         <rect x="328" y="95" width="220" height="12" fill="#0f172a"/>
         <text x="348" y="98" font-family="monospace" font-size="13" fill="#818cf8" font-weight="bold">moby</text>
         <text x="468" y="98" font-family="monospace" font-size="10" fill="#94a3b8">:8080</text>
         <text x="348" y="128" font-family="monospace" font-size="11" fill="#94a3b8">cagent serve api</text>
-        <rect x="344" y="138" width="190" height="28" rx="6" fill="#818cf8" opacity="0.05" stroke="#818cf8" stroke-width="1" opacity="0.2"/>
+
+        <rect x="344" y="138" width="190" height="28" rx="6" fill="#818cf8" fill-opacity="0.05" stroke="#818cf8" stroke-width="1" stroke-opacity="0.2"/>
         <text x="354" y="157" font-family="sans-serif" font-size="11" fill="#e2e8f0" opacity="0.7">🧠 LLM (Anthropic / OpenAI)</text>
-        <rect x="344" y="176" width="90" height="28" rx="6" fill="#34d399" opacity="0.08" stroke="#34d399" stroke-width="1" opacity="0.3"/>
+
+        <rect x="344" y="176" width="90" height="28" rx="6" fill="#34d399" fill-opacity="0.08" stroke="#34d399" stroke-width="1" stroke-opacity="0.3"/>
         <text x="354" y="195" font-family="sans-serif" font-size="11" fill="#34d399">🔧 Shell</text>
-        <rect x="444" y="176" width="90" height="28" rx="6" fill="#fb923c" opacity="0.08" stroke="#fb923c" stroke-width="1" opacity="0.3"/>
+
+        <rect x="444" y="176" width="90" height="28" rx="6" fill="#fb923c" fill-opacity="0.08" stroke="#fb923c" stroke-width="1" stroke-opacity="0.3"/>
         <text x="454" y="195" font-family="sans-serif" font-size="11" fill="#fb923c">📁 Files</text>
-        <rect x="344" y="214" width="90" height="28" rx="6" fill="#38bdf8" opacity="0.08" stroke="#38bdf8" stroke-width="1" opacity="0.3"/>
+
+        <rect x="344" y="214" width="90" height="28" rx="6" fill="#38bdf8" fill-opacity="0.08" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.3"/>
         <text x="354" y="233" font-family="sans-serif" font-size="11" fill="#38bdf8">🌐 Fetch</text>
-        <rect x="444" y="214" width="90" height="28" rx="6" fill="#a78bfa" opacity="0.08" stroke="#a78bfa" stroke-width="1" opacity="0.3"/>
+
+        <rect x="444" y="214" width="90" height="28" rx="6" fill="#a78bfa" fill-opacity="0.08" stroke="#a78bfa" stroke-width="1" stroke-opacity="0.3"/>
         <text x="454" y="233" font-family="sans-serif" font-size="11" fill="#a78bfa">🔗 MCP</text>
+
         <line x1="548" y1="168" x2="588" y2="168" stroke="#34d399" stroke-width="2" opacity="0.5"/>
         <polygon points="586,163 596,168 586,173" fill="#34d399" opacity="0.5"/>
         <text x="550" y="160" font-family="sans-serif" font-size="9" fill="#94a3b8">MCP</text>
+
+        <!-- Tool-gateway container -->
         <rect x="596" y="75" width="160" height="180" rx="14" fill="#0f172a" stroke="#34d399" stroke-width="1.5" opacity="0.8"/>
         <rect x="596" y="75" width="160" height="32" rx="14" fill="#34d399" opacity="0.08"/>
         <rect x="596" y="95" width="160" height="12" fill="#0f172a"/>
         <text x="610" y="98" font-family="monospace" font-size="12" fill="#34d399" font-weight="bold">tool-gateway</text>
-        <rect x="612" y="118" width="130" height="28" rx="6" fill="#34d399" opacity="0.08" stroke="#34d399" stroke-width="1" opacity="0.3"/>
+
+        <rect x="612" y="118" width="130" height="28" rx="6" fill="#34d399" fill-opacity="0.08" stroke="#34d399" stroke-width="1" stroke-opacity="0.3"/>
         <text x="622" y="137" font-family="sans-serif" font-size="11" fill="#34d399">🎭 Playwright</text>
-        <rect x="612" y="156" width="130" height="28" rx="6" fill="#38bdf8" opacity="0.08" stroke="#38bdf8" stroke-width="1" opacity="0.3"/>
+
+        <rect x="612" y="156" width="130" height="28" rx="6" fill="#38bdf8" fill-opacity="0.08" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.3"/>
         <text x="622" y="175" font-family="sans-serif" font-size="11" fill="#38bdf8">🔍 Web Search</text>
-        <rect x="612" y="194" width="130" height="28" rx="6" fill="#fb923c" opacity="0.08" stroke="#fb923c" stroke-width="1" opacity="0.3"/>
+
+        <rect x="612" y="194" width="130" height="28" rx="6" fill="#fb923c" fill-opacity="0.08" stroke="#fb923c" stroke-width="1" stroke-opacity="0.3"/>
         <text x="622" y="213" font-family="sans-serif" font-size="11" fill="#fb923c">📄 Page Fetch</text>
+
         <rect x="612" y="232" width="130" height="10" rx="5" fill="#818cf8" opacity="0.06"/>
         <text x="622" y="241" font-family="sans-serif" font-size="10" fill="#94a3b8">🌤️ Weather</text>
+
         <line x1="60" y1="280" x2="740" y2="280" stroke="#1e293b" stroke-width="1" opacity="0.5"/>
+
+        <!-- Volumes -->
         <text x="80" y="310" font-family="sans-serif" font-size="12" fill="#94a3b8">Volumes:</text>
-        <rect x="80" y="322" width="190" height="34" rx="8" fill="#818cf8" opacity="0.05" stroke="#818cf8" stroke-width="1" opacity="0.2"/>
+
+        <rect x="80" y="322" width="190" height="34" rx="8" fill="#818cf8" fill-opacity="0.05" stroke="#818cf8" stroke-width="1" stroke-opacity="0.2"/>
         <text x="94" y="344" font-family="monospace" font-size="11" fill="#818cf8">~/.mobyclaw/</text>
         <text x="205" y="344" font-family="sans-serif" font-size="10" fill="#94a3b8">user data</text>
-        <rect x="290" y="322" width="190" height="34" rx="8" fill="#fb923c" opacity="0.05" stroke="#fb923c" stroke-width="1" opacity="0.2"/>
+
+        <rect x="290" y="322" width="190" height="34" rx="8" fill="#fb923c" fill-opacity="0.05" stroke="#fb923c" stroke-width="1" stroke-opacity="0.2"/>
         <text x="304" y="344" font-family="monospace" font-size="11" fill="#fb923c">/workspace/*</text>
         <text x="415" y="344" font-family="sans-serif" font-size="10" fill="#94a3b8">projects</text>
-        <rect x="500" y="322" width="190" height="34" rx="8" fill="#34d399" opacity="0.05" stroke="#34d399" stroke-width="1" opacity="0.2"/>
+
+        <rect x="500" y="322" width="190" height="34" rx="8" fill="#34d399" fill-opacity="0.05" stroke="#34d399" stroke-width="1" stroke-opacity="0.2"/>
         <text x="514" y="344" font-family="monospace" font-size="11" fill="#34d399">/source</text>
         <text x="580" y="344" font-family="sans-serif" font-size="10" fill="#94a3b8">self-modify</text>
+
         <text x="80" y="390" font-family="sans-serif" font-size="12" fill="#94a3b8">Tools:</text>
         <rect x="120" y="376" width="30" height="20" rx="10" fill="#38bdf8" opacity="0.2"/>
         <text x="128" y="391" font-family="sans-serif" font-size="12" fill="#38bdf8" font-weight="bold">19</text>
         <text x="160" y="390" font-family="sans-serif" font-size="11" fill="#94a3b8">MCP tools via tool-gateway — browser automation, web search, fetch, weather</text>
+
         <text x="80" y="418" font-family="sans-serif" font-size="12" fill="#94a3b8">Built-in:</text>
         <text x="160" y="418" font-family="sans-serif" font-size="11" fill="#94a3b8">shell, filesystem, fetch, think — directly in cagent</text>
       </svg>
@@ -779,6 +907,9 @@ MOBYCLAW_ACTIVE_HOURS=07:00-23:00</code></pre>
 <!-- Footer -->
 <footer>
   <div class="container">
+    <a href="https://orynth.dev/projects/moby-claw" target="_blank" rel="noopener" class="orynth-badge" aria-label="Featured on Orynth">
+      <img src="https://orynth.dev/api/badge/moby-claw?theme=light&style=default" alt="Featured on Orynth" width="260" height="80" loading="lazy" />
+    </a>
     <p>
       🐋 <strong>mobyclaw</strong> — an open-source personal AI agent.
       <br>
@@ -788,6 +919,52 @@ MOBYCLAW_ACTIVE_HOURS=07:00-23:00</code></pre>
     </p>
   </div>
 </footer>
+
+<script>
+  function copyCa() {
+    const addressEl = document.getElementById('caAddress');
+    const banner = document.getElementById('caBanner');
+    const iconEl = document.getElementById('caCopyIcon');
+    if (!addressEl || !banner) return;
+
+    const address = addressEl.textContent.trim();
+    const originalIconHtml = iconEl.innerHTML;
+    const checkIconHtml = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const showCopied = () => {
+      banner.classList.add('copied');
+      iconEl.innerHTML = checkIconHtml;
+      setTimeout(() => {
+        banner.classList.remove('copied');
+        iconEl.innerHTML = originalIconHtml;
+      }, 1600);
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(address).then(showCopied).catch(() => fallbackCopy(address, showCopied));
+    } else {
+      fallbackCopy(address, showCopied);
+    }
+  }
+
+  function fallbackCopy(text, onSuccess) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+      document.execCommand('copy');
+      onSuccess();
+    } catch (err) {
+      console.error('Copy failed:', err);
+    }
+    document.body.removeChild(textarea);
+  }
+</script>
 
 </body>
 </html>
